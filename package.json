@@ -6,10 +6,10 @@
   "engines": {
     "gitbook": ">=0.4.6"
   },
-  "homepage": "https://github.com/DomainDrivenArchitecture/gitbook-plugin-expandable-chapters",
+  "homepage": "https://github.com/antonselukh/gitbook-plugin-expandable-chapters",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DomainDrivenArchitecture/gitbook-plugin-expandable-chapters.git"
+    "url": "https://github.com/antonselukh/gitbook-plugin-expandable-chapters.git"
   },
   "license": "Apache 2"
 }
