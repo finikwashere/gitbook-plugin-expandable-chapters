@@ -1,29 +1,46 @@
-require(['gitbook'], function(gitbook) {
-  /*function expand(chapter) {
-    chapter.show();
+require(['gitbook', 'jQuery'], function(gitbook, $) {
+  var TOGGLE_CLASSNAME = 'expanded',
+      CHAPTER = '.chapter',
+      ARTICLES = '.articles',
+      TRIGGER_TEMPLATE = '<i class="exc-trigger fa"></i>';
+  var init = function () {
+    // adding the trigger element to each ARTICLES parent and binding the event
+    $(ARTICLES)
+      .parent(CHAPTER)
+      .children('a')
+      .append(
+        $(TRIGGER_TEMPLATE)
+          .on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle($(e.target).closest(CHAPTER));
+          })
+      );
+    //expand current selected chapter with it's parents
+    var activeChapter = $('.active');
+    expand(activeChapter);
+    expand(activeChapter.parents(CHAPTER));
 
-    if (chapter.parent().attr('class') != 'summary' &&
-      chapter.parent().attr('class') != 'book-summary' &&
-      chapter.length != 0
-    ) {
-      expand(chapter.parent());
+
+  } 
+  var toggle = function ($chapter) {
+    if ($chapter.hasClass('expanded')) {
+      collapse($chapter);
+    } else {
+      expand($chapter);
     }
-  }*/
-  alert('init')
-
+  }
+  var collapse = function ($chapter) {
+    if ($chapter.length) {
+      $chapter.removeClass(TOGGLE_CLASSNAME);
+    }
+  }
+  var expand = function($chapter) {
+    if ($chapter.length) {
+      $chapter.addClass(TOGGLE_CLASSNAME);
+    }
+  }
   gitbook.events.bind('page.change', function() {
-    /*$('li.chapter').children('ul.articles').hide();
-    $chapter = $('li.chapter.active');
-    $children = $chapter.children('ul.articles');
-    $parent = $chapter.parent();
-    $siblings = $chapter.siblings().children('ul.articles');
-
-    expand($chapter);
-
-    if ($children.length > 0) {
-      $children.show();
-    }*/
-    alert('page change')
-  });
-
+    init()
+  }); 
 });
